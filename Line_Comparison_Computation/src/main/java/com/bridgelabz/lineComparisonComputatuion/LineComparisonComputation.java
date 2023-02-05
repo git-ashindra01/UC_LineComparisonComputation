@@ -1,9 +1,8 @@
 package com.bridgelabz.lineComparisonComputatuion;
 
-import java.lang.Math;
 import java.util.Scanner;
 
-public class LineComparisonComputation {
+public class LineComparisonComputation implements Comparable<LineComparisonComputation> {
     int x1, y1, x2, y2;
 
     public LineComparisonComputation(int x1, int y1, int x2, int y2) {
@@ -17,43 +16,41 @@ public class LineComparisonComputation {
         return Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
+
+
+    public int compareTo(LineComparisonComputation line) {
+        if (this.length() < line.length()) {
+            return -1;
         }
-        if (!(obj instanceof LineComparisonComputation)) {
-            return false;
+        if (this.length() > line.length()) {
+            return 1;
         }
-        LineComparisonComputation line = (LineComparisonComputation) obj;
-        return this.length() == line.length();
+        return 0;
     }
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter x1, y1, x2, y2 for Line 1:");
-        System.out.println("Enter  the x1 Co-ordinate : ");
         int x1 = scan.nextInt();
-        System.out.println("Enter  the y1 Co-ordinate : ");
         int y1 = scan.nextInt();
-        System.out.println("Enter  the x2 Co-ordinate : ");
         int x2 = scan.nextInt();
-        System.out.println("Enter  the y2 Co-ordinate : ");
         int y2 = scan.nextInt();
         LineComparisonComputation line1 = new LineComparisonComputation(x1, y1, x2, y2);
 
-
         System.out.println("Enter x1, y1, x2, y2 for Line 2:");
-        System.out.println("Enter  the x1 Co-ordinate : ");
         x1 = scan.nextInt();
-        System.out.println("Enter  the y1 Co-ordinate : ");
         y1 = scan.nextInt();
-        System.out.println("Enter  the x2 Co-ordinate : ");
         x2 = scan.nextInt();
-        System.out.println("Enter  the y2 Co-ordinate : ");
         y2 = scan.nextInt();
         LineComparisonComputation line2 = new LineComparisonComputation(x1, y1, x2, y2);
 
-        System.out.println("Line 1 and Line 2 are equal: " + line1.equals(line2));
+        int result = line1.compareTo(line2);
+        if (result == 0) {
+            System.out.println("Line 1 and Line 2 are equal.");
+        } else if (result == -1) {
+            System.out.println("Line 1 is less than Line 2.");
+        } else {
+            System.out.println("Line 1 is greater than Line 2.");
+        }
     }
 }
