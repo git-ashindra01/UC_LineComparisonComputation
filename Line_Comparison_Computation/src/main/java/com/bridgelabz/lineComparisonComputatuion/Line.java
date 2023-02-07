@@ -8,7 +8,7 @@ class Line implements Comparable<Line> {
         this.start = start;
         this.end = end;
     }
-
+ 
     double length() {
         int xDiff = end.x - start.x;
         int yDiff = end.y - start.y;
